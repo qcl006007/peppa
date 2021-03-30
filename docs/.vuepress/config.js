@@ -1,7 +1,7 @@
 const themeConfig = require('./config/theme/')
 
 module.exports = {
-  base: '/',
+  base: '/peppa/',
   title: "QI Peppa",
   description: '正道的光，照在了大地上啊！把每个...',
   dest: 'docs/.vuepress/dist',
