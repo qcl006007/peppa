@@ -1,15 +1,21 @@
 language: node_js
 node_js:
-    - 10
+  - "lts/*"
+branches:
+  only:
+  - master
+
+
 install:
-    - npm install
+- npm install
 script:
-    - npm run docs:build
-after_success:
-    - cd docs/.vuepress/dist
-    - git init
-    - git config --global user.name "${U_NAME}"
-    - git config --global user.email "${U_EMAIL}"
-    - git add -A
-    - git commit -m 'deploy'
-    - git push --quiet --force "https://${GITHUB_TOKEN}@${GH_REF}" master:${P_BRANCH}
+- mpm run docs:build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: ./sources/.vuepress/dist/ ## 根据情况自定义到静态文件输出目录
+  target-branch: gh-pages
+  verbose: true
+  on:
+    branch: master
