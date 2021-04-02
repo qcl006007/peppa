@@ -40,6 +40,16 @@ body 根元素
 display 为 inline-block、table-cells、flex
 overflow 除了 visible 以外的值 (hidden、auto、scroll)
 
+6. Css绘出三角形
+
+```
+#triangle{
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom: 50px solid red;
+    }
+```
 
 ## 参考
 
