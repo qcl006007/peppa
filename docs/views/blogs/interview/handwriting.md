@@ -213,6 +213,89 @@ div1.addEventListener(('drag', throttle(function (e) {
 })))
 ```
 
+## 找出父级id
+
+已知数据格式，实现一个函数 fn 找出链条中所有的父级 id
+题目描述：
+```
+const list = [{
+    id: '1',
+    name: 'test1',
+    children: [
+        {
+            id: '11',
+            name: 'test11',
+            children: [
+                {
+                    id: '111',
+                    name: 'test111'
+                },
+                {
+                    id: '112',
+                    name: 'test112'
+                }
+            ]
+
+        },
+        {
+            id: '12',
+            name: 'test12',
+            children: [
+                {
+                    id: '121',
+                    name: 'test121'
+                },
+                {
+                    id: '122',
+                    name: 'test122'
+                }
+            ]
+        }
+    ]
+}];
+const id = '112'
+const fn = (value) => {
+...
+}
+fn(id, list) // 输出 [1， 11， 112]
+
+```
+
+答案：仔细观察题目发现，整个数据结构可以当作一颗不规则n叉树，针对list中的每一个item都可以当作一棵树，运用深度优先遍历找到从根节点到目标节点的路径，路径上的节点id就是要寻找的。
+```
+
+function findParentIds(id, list) {
+  let result = [];
+  list.forEach(tree => {
+    let temp = [];
+    dfs(tree, id, temp);
+    if (temp.length > 0) {
+      result.push(temp);
+    }
+  });
+  return result.length>1? result: result[0];
+
+}
+
+function dfs(root, id, result) {
+  if (root.id === id) {
+    result.unshift(root.id);
+    return true;
+  }
+  if (root.children == undefined) {
+    return false;
+  }
+  for (let child of root.children) {
+    if (dfs(child, id, result)) {
+      result.unshift(root.id);
+      return true;
+    }
+  }
+  return false;
+}
+
+```
+
 ## 二叉树的非递归中序遍历
 
 
