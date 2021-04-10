@@ -296,6 +296,15 @@ function dfs(root, id, result) {
 
 ```
 
+## 获取页面所有的 tagname
+
+```
+let tags = [...document.querySelectorAll(*)].map(elem => elem.tagName);
+
+return [...new Set(tags)];
+
+```
+
 ## 二叉树的非递归中序遍历
 
 
