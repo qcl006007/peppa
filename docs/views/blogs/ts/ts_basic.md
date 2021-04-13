@@ -1,5 +1,5 @@
 ---
-title: 【TypeScript】- 入门进阶02
+title: 【TypeScript】- 基础概述
 sidebar: "auto"
 date: 2021-03-02
 tags:

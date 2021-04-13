@@ -1,5 +1,5 @@
 ---
-title: 【TypeScript】- 入门进阶01
+title: 【TypeScript】- 进阶01
 sidebar: "auto"
 date: 2021-03-02
 tags:
@@ -126,10 +126,55 @@ interface SquareConfig {
 
 ## 类型断言
 
+类型推断：TypeScript里，在有些没有明确指出类型的地方，类型推论会帮助提供类型。
+
+类型断言有两种形式：
+
+```
+let str = 'str';
+
+str as string / <string>str
+```
+
+## 交叉类型
+交叉类型是将多个类型合并为一个类型。 这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性。
 
 ## 联合类型
 
+### 联合类型基础
+联合类型与交叉类型很有关联，但是使用上却完全不同。它表明只要是所选类型的其中一个就可以。
 
+示例：
+
+```
+function padLeft(value: string, padding: string | number) {
+    // logic
+}
+
+let indentedString = padLeft("Hello world", true); // 报错
+```
+
+### 类型保护与区分类型
+
+对于联合类型而言，我们只能调用联合类型中各个类型所共有的属性或方法。因此在某些时候，我们不得不：
+```
+let pet = getSmallPet();
+
+if ((<Fish>pet).swim) {
+    (<Fish>pet).swim();
+}
+else {
+    (<Bird>pet).fly();
+}
+
+```
+而typescript中的类型保护很好的提供了这种机制，类型保护就是一些表达式，它们会在运行时检查以确保在某个作用域里的类型。
+
+```
+function isFish(pet: Fish | Bird): pet is Fish {
+    return (<Fish>pet).swim !== undefined;
+}
+```
 
 ## 参考
 
